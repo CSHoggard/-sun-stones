@@ -96,10 +96,9 @@ dataset_three %<>% mutate_at(c(names(dataset_three)), funs(factor(.))) %>%
 Or to download straight into R from GitHub (preferred):
 
 ```{r chunk3, echo = TRUE, message = FALSE, warning = FALSE}
-dataset_one   <- rio::import("https://github.com/CSHoggard/-Ahlqvist_et_al_2020/raw/master/test.rds")
-dataset_two   <- import("https://github.com/CSHoggard/-Ahlqvist_et_al_2020/raw/master/dataset_two.rds")
-dataset_three <- import("https://github.com/CSHoggard/-Ahlqvist_et_al_2020/raw/master/dataset_three.rds")
-
+dataset_one   <- rio::import("https://github.com/CSHoggard/-sun-stones/raw/main/dataset_one.rds")
+dataset_two   <- rio::import("https://github.com/CSHoggard/-sun-stones/raw/main/dataset_two.rds")
+dataset_three <- rio::import("https://github.com/CSHoggard/-sun-stones/raw/main/dataset_three.rds")
 ```
 
 Each dataset will be subject to the same three analytical and exploratory procedures, specifically multiple correspondence analysis (MCA), network analysis and the tree-building exercises. In testing the underlying structure of variation in the artefacts, a combination of all examples and unique examples (artefacts with a distinct dichotomous configuration) will be pursued. The following transformation arguments are therefore required:  
@@ -986,7 +985,7 @@ To perform the two parsimony methods, the `Rphylip::Rmix` and `Rphylip::Rdollop`
 
 In detail, the Wagner method for each iteration of the dataset was as follows:  
 
-```{r chunk21, echo = FALSE, message = FALSE, warning = FALSE}
+```{r chunk21, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
 
 dataset_one_matrix_unique   <- as.matrix(dataset_one_unique)
 wagneronetreeunique <- Rmix(dataset_one_matrix_unique, method = "Wagner", random.addition = 10, global = FALSE)
@@ -1003,7 +1002,7 @@ write.tree(wagnerthreetreeunique, "dataset_three/wagner/wagner_unique.tree")
 
 The trees then can be read into the R Environment through the `ggtree:read.tree` argument:  
 
-```{r chunk22, echo = FALSE, message = FALSE, warning = FALSE}
+```{r chunk22, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
 
 wagneronetreeunique <- read.tree("dataset_one/wagner/wagner_unique.tree")
 wagnertwotreeunique <- read.tree("dataset_two/wagner/wagner_unique.tree")
@@ -1012,11 +1011,11 @@ wagnerthreetreeunique <- read.tree("dataset_three/wagner/wagner_unique.tree")
 
 Or alternatively through the import functions in the `rio` package (preferred):  
 
-```{r chunk23, echo = TRUE, message = FALSE, warning = FALSE}
+```{r chunk23, message = FALSE, warning = FALSE}
 
-wagneronetreeunique   <- import("https://github.com/CSHoggard/-Bornholm_Study/raw/master/wagneronetreeunique.rds")
-wagnertwotreeunique   <- import("https://github.com/CSHoggard/-Bornholm_Study/raw/master/wagnertwotreeunique.rds")
-wagnerthreetreeunique <- import("https://github.com/CSHoggard/-Bornholm_Study/raw/master/wagnerthreetreeunique.rds")
+wagneronetreeunique   <- import("https://github.com/CSHoggard/-sun-stones/raw/main/wagneronetreeunique.rds")
+wagnertwotreeunique   <- import("https://github.com/CSHoggard/-sun-stones/raw/main/wagnertwotreeunique.rds")
+wagnerthreetreeunique <- import("https://github.com/CSHoggard/-sun-stones/raw/main/wagnerthreetreeunique.rds")
 
 ```
 
@@ -1050,7 +1049,7 @@ ggtree(consensusthreewagner, layout = "rectangular") +
 
 Factors such as shape, material, size and context can now be visualised:  
 
-```{r chunk24, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 6, fig.width = 6}
+```{r chunk25, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 6, fig.width = 6}
 
 g7 <- ggtree(consensustwowagner, layout = "rectangular")
 g8 <- ggtree(consensusthreewagner, layout = "rectangular")
@@ -1122,7 +1121,7 @@ g8 %<+% dataset_three_unique_meta +
 
 In detail, the Dollo method for each iteration of the dataset was as follows:
 
-```{r chunk25, echo = FALSE, message = FALSE, warning = FALSE}
+```{r chunk26, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
 
 dolloonetreeunique <- Rdollop(dataset_one_matrix_unique, method = "dollo", random.addition = 10, global = FALSE)
 write.tree(dolloonetreeunique, "dataset_one/dollo/dollo_unique.tree")
@@ -1136,7 +1135,7 @@ write.tree(dollothreetreeunique, "dataset_three/dollo/dollo_unique.tree")
 
 Note: the matrices were produced in the previous parsimony method:  
 
-```{r chunk26, echo = FALSE, message = FALSE, warning = FALSE}
+```{r chunk27, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
 
 dolloonetreeunique <- read.tree("dataset_one/dollo/dollo_unique.tree")
 dollotwotreeunique <- read.tree("dataset_two/dollo/dollo_unique.tree")
@@ -1145,17 +1144,17 @@ dollothreetreeunique <- read.tree("dataset_three/dollo/dollo_unique.tree")
 
 Or alternatively through the import functions in the `rio` package (preferred):  
 
-```{r chunk27, echo = TRUE, message = FALSE, warning = FALSE}
+```{r chunk28, echo = TRUE, message = FALSE, warning = FALSE}
 
-dolloonetreeunique   <- import("https://github.com/CSHoggard/-Bornholm_Study/raw/master/dolloonetreeunique.rds")
-dollotwotreeunique   <- import("https://github.com/CSHoggard/-Bornholm_Study/raw/master/dollotwotreeunique.rds")
-dollothreetreeunique <- import("https://github.com/CSHoggard/-Bornholm_Study/raw/master/dollothreetreeunique.rds")
+dolloonetreeunique   <- import("https://github.com/CSHoggard/-sun-stones/raw/main/dolloonetreeunique.rds")
+dollotwotreeunique   <- import("https://github.com/CSHoggard/-sun-stones/raw/main/dollotwotreeunique.rds")
+dollothreetreeunique <- import("https://github.com/CSHoggard/-sun-stones/raw/main/dollothreetreeunique.rds")
 
 ```
 
 These can then be visualised through the `ggtree` visualisation tools, with consensus trees computer through the following code:  
 
-```{r chunk28, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 6, fig.width = 6}
+```{r chunk29, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 6, fig.width = 6}
 
 
 consensusonedollo   <- consensus(dolloonetreeunique, p = 0.5, check.labels = TRUE)
@@ -1183,7 +1182,7 @@ ggtree(consensusthreedollo, layout = "rectangular") +
 
 Factors such as shape, material, size and context can now be visualised:  
 
-```{r chunk29, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 6, fig.width = 6}
+```{r chunk30, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 6, fig.width = 6}
 
 g9 <- ggtree(consensustwodollo, layout = "rectangular")
 g10 <- ggtree(consensusthreedollo, layout = "rectangular")
@@ -1255,7 +1254,7 @@ g10 %<+% dataset_three_unique_meta +
 
 We can summarise the differences between the two parsimony methods in the following code:
 
-```{r chunk30, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
+```{r chunk31, echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
 
 comparePhylo(consensusonewagner, consensusonedollo)
 comparePhylo(consensustwowagner, consensustwodollo)
