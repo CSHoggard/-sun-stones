@@ -1289,3 +1289,7 @@ cg2 <- g10 %<+% dataset_three_unique_meta +
 
 (cg1/cg2)
 ```
+
+# References
+
+Please refer to the article references for literature cited in this document.
