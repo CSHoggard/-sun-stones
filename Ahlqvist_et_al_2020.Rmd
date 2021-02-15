@@ -59,10 +59,10 @@ A copy of all files (including visualisations and tree data) can also be found o
 - **ggtree b.2.2.0** (https://bioconductor.org/packages/release/bioc/html/ggtree.html)  
 - **igraph v.1.2.6** (https://cran.r-project.org/web/packages/igraph/index.html)  
 - **magrittr v.1.5** (https://cran.r-project.org/web/packages/magrittr/index.html)  
-- **patchwork v.1.1.0** (https://cran.r-project.org/web/packages/patchwork/index.html)
+- **patchwork v.1.1.0** (https://cran.r-project.org/web/packages/patchwork/index.html)  
 - **phangorn v.2.5.5** (https://cran.r-project.org/web/packages/phangorn/index.html)  
 - **rio v.0.5.16**  (https://cran.r-project.org/web/packages/rio/index.html)  
-- **Rphylip v.0.1-23** (https://cran.r-project.org/web/packages/Rphylip/index.html)
+- **Rphylip v.0.1-23** (https://cran.r-project.org/web/packages/Rphylip/index.html)  
 - **tidyverse v.1.3.0** (https://cran.r-project.org/web/packages/tidyverse/index.html) 
 
 Note: to install ggtree from Biconductor you will first need to install **BiocManager**. In this script **BiocManager v. 1.30.10* is used.   
@@ -552,7 +552,7 @@ ggraph(network_three_bp$proj2, layout = 'stress') +
 
 # **Tree-Building Exercises**  
 
-For the last three decades evolutionary archaeologists have adapted micro-evolutionary (population genetic) and macro-evolutionary (phylogenetic) methods to better understand the nature of change in material culture (O'Brien and Lyman, 2000 Bettinger, 2008; Shennan, 2008, 2009; Riede et al. 2019; Ivanovaite et al. 2019). Through this notion of culture as a multi-generational system of information transmission *sensu* Boyd and Richerson (1985) past communities of practice, estimations of contact and mixing have been investigated, and the nature of  transmission hypothesised (O'Brien et al. 2008; Collard and Shennan, 2008; Riede 2011).  
+For the last three decades evolutionary archaeologists have adapted macro-evolutionary (phylogenetic) methods to better understand the nature of change in material culture (O'Brien and Lyman, 2000 Bettinger, 2008; Shennan, 2008, 2009; Riede et al. 2019; Ivanovaite et al. 2019). Through this notion of culture as a multi-generational system of information transmission *sensu* Boyd and Richerson (1985) past communities of practice, estimations of contact and mixing have been investigated, and the nature of  transmission hypothesised (O'Brien et al. 2008; Collard and Shennan, 2008; Riede 2011).  
 
 To fully explore the underlying structure of variation within the sun-stones, and to hypothesise the underwritten system of information transmission across the production of the sun-stones, a variety of different tree-building exercises are explored here - they can be here categorised into **agglomerative hierarchical clustering** and **parsimony-based phylogenetic** approaches. The first set of methodologies provide an underlying basis of variation, similar to the methodologies above, using measures calculated from distance matrices. The second set of methodologies are more computationally intensive and use the same distance matrices to determine the hypothesised evolutionary relationships between the artefacts through the assumption that the relationships with the smallest number of character changes is most likely to be correct, or to quote Edwards and Cavalli-Sforza (1963: 553): *“the most plausible estimate of the evolutionary tree is that which invokes the minimum net amount of evolution.”* While the latter methodologies have been grounded in systematic biology for some time, applications of parsimony-based phylogenetic analyses are more recent (O'Brien et al. 2001; Mace et al. 2005; Lipo et al. 2006).     
 
@@ -715,6 +715,23 @@ g2 %<+% dataset_three_unique_meta +
   theme(plot.title = element_text(hjust = 0.5, 
                                   margin = margin(0,0,10,0)))
 
+hm1 <- g2 %<+% dataset_three_unique_meta + 
+  geom_tippoint(aes(shape = material, colour = shape), size = 4) +
+  labs(shape = "Material", colour = "Shape") +
+  scale_shape_discrete(name = "Material", labels = c("Sandstone", 
+                                                      "Shale", 
+                                                      "Water-Rounded Pebble")) +
+  scale_colour_discrete(name = "Shape", labels = c("Asymmetric", 
+                                                      "Oval", 
+                                                      "Round")) +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  margin = margin(0,0,10,0)))
+
+hm1a <- select(dataset_three_unique, -sandstone, -shale, -wrpebble, -asymmetric, -oval, -round)
+
+gheatmap(hm1, hm1a) + scale_fill_brewer(palette="Set4")
+
 ```
 
 ## **Unweighted Pair Group Method with Arithmetic Mean (UPGMA)**
@@ -839,6 +856,21 @@ g4 %<+% dataset_three_unique_meta +
   theme(plot.title = element_text(hjust = 0.5, 
                                   margin = margin(0,0,10,0)))
 
+hm2 <- g4 %<+% dataset_three_unique_meta + 
+  geom_tippoint(aes(shape = material, colour = shape), size = 4) +
+  labs(shape = "Material", colour = "Shape") +
+  scale_shape_discrete(name = "Material", labels = c("Sandstone", 
+                                                      "Shale", 
+                                                      "Water-Rounded Pebble")) +
+  scale_colour_discrete(name = "Shape", labels = c("Asymmetric", 
+                                                      "Oval", 
+                                                      "Round")) +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  margin = margin(0,0,10,0)))
+
+gheatmap(hm2, hm1a) + scale_fill_brewer(palette="Set4")
+
 ```
 
 ## **Weighted Pair Group Method with Arithmetic Mean (WPGMA)**
@@ -962,6 +994,21 @@ g6 %<+% dataset_three_unique_meta +
   theme_minimal() + 
   theme(plot.title = element_text(hjust = 0.5, 
                                   margin = margin(0,0,10,0)))
+
+hm3 <- g6 %<+% dataset_three_unique_meta + 
+  geom_tippoint(aes(shape = material, colour = shape), size = 4) +
+  labs(shape = "Material", colour = "Shape") +
+  scale_shape_discrete(name = "Material", labels = c("Sandstone", 
+                                                      "Shale", 
+                                                      "Water-Rounded Pebble")) +
+  scale_colour_discrete(name = "Shape", labels = c("Asymmetric", 
+                                                      "Oval", 
+                                                      "Round")) +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  margin = margin(0,0,10,0)))
+
+gheatmap(hm3, hm1a) + scale_fill_brewer(palette="Set4")
 
 ```
 
@@ -1115,6 +1162,22 @@ g8 %<+% dataset_three_unique_meta +
   theme(plot.title = element_text(hjust = 0.5, 
                                   margin = margin(0,0,10,0)))
 
+hm4 <- g8 %<+% dataset_three_unique_meta + 
+  geom_tippoint(aes(shape = material, colour = shape), size = 3) +
+  labs(shape = "Material", colour = "Shape") +
+  scale_shape_discrete(name = "Material", labels = c("Sandstone", 
+                                                      "Shale", 
+                                                      "Water-Rounded Pebble")) +
+  scale_colour_discrete(name = "Shape", labels = c("Asymmetric", 
+                                                      "Oval", 
+                                                      "Round")) +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  margin = margin(0,0,10,0)))
+hm4a <- dataset_three_clean %>% select(-sandstone, -shale, -wrpebble, -asymmetric, -oval, -round)
+
+gheatmap(hm4, hm4a) + scale_fill_brewer(palette="Set4")
+
 ```
 
 ### **Dollo Parsimony**
@@ -1247,6 +1310,22 @@ g10 %<+% dataset_three_unique_meta +
   theme_minimal() + 
   theme(plot.title = element_text(hjust = 0.5, 
                                   margin = margin(0,0,10,0)))
+
+
+hm5 <- g10 %<+% dataset_three_unique_meta + 
+  geom_tippoint(aes(shape = material, colour = shape), size = 3) +
+  labs(shape = "Material", colour = "Shape") +
+  scale_shape_discrete(name = "Material", labels = c("Sandstone", 
+                                                      "Shale", 
+                                                      "Water-Rounded Pebble")) +
+  scale_colour_discrete(name = "Shape", labels = c("Asymmetric", 
+                                                      "Oval", 
+                                                      "Round")) +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  margin = margin(0,0,10,0)))
+
+gheatmap(hm5, hm4a) + scale_fill_brewer(palette="Set4")
 
 ```
 
